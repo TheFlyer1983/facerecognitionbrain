@@ -1,0 +1,5 @@
+.hover-black:hover,
+.hover-black:active,
+.hover-black:focus {
+  background-color: #000 !important;
+}
