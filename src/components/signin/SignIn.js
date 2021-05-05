@@ -1,4 +1,5 @@
 import React from 'react';
+import { apiConfig } from '../../helpers'
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -15,21 +16,21 @@ class SignIn extends React.Component {
     this.setState({signInPassword: event.target.value})
   }
   onSubmitSignIn = () => {
-    fetch('https://immense-plateau-83482.herokuapp.com/signin', {
+    fetch(`${apiConfig}/signin`, {
       method: 'post',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: this.state.signInEmail,
-        password: this.state.signInPassword
-      })
+        password: this.state.signInPassword,
+      }),
     })
-    .then(response => response.json())
-    .then(user => {
-      if (user.id) {
-        this.props.loadUser(user);
-        this.props.onRouteChange('home');
-      }
-    })
+      .then((response) => response.json())
+      .then((user) => {
+        if (user.id) {
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        }
+      });
   }
   render(){
     const {onRouteChange} = this.props;

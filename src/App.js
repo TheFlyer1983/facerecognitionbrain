@@ -7,6 +7,7 @@ import Rank from './components/rank/Rank';
 import FaceRecognition from './components/facerecognition/FaceRecognition';
 import SignIn from './components/signin/SignIn';
 import Register from './components/register/Register';
+import { apiConfig } from './helpers';
 import './App.css';
 
 const particlesObject = {
@@ -75,7 +76,7 @@ class App extends Component {
   };
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-    fetch('https://immense-plateau-83482.herokuapp.com/imageurl', {
+    fetch(`${apiConfig}/imageurl`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -85,8 +86,8 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-        fetch('https://immense-plateau-83482.herokuapp.com/image', {
-          method: 'put',
+          fetch(`${apiConfig}/image`, {
+            method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               id: this.state.user.id,
