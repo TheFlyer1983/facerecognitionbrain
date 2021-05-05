@@ -9,6 +9,7 @@ import SignIn from './components/signin/SignIn';
 import Register from './components/register/Register';
 import Modal from './components/modal/Modal';
 import Profile from './components/profile/Profile';
+import { apiConfig } from './helpers';
 import './App.css';
 
 const particlesObject = {
@@ -49,7 +50,7 @@ class App extends Component {
   componentDidMount() {
     const token = window.sessionStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:3000/signin', {
+      fetch(`${apiConfig}/signin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ class App extends Component {
         .then((resp) => resp.json())
         .then((data) => {
           if (data && data.id) {
-            fetch(`http://localhost:3000/profile/${data.id}`, {
+            fetch(`${apiConfig}/profile/${data.id}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +104,6 @@ class App extends Component {
         bottomRow: height - clarifaiFace.bottom_row * height,
       };
     });
-    
   };
   displayFaceBoxes = (boxes) => {
     if (boxes) {
@@ -115,7 +115,7 @@ class App extends Component {
   };
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('http://localhost:3000/imageurl', {
+    fetch(`${apiConfig}/imageurl`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -128,8 +128,8 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch('http://localhost:3000/image', {
-            method: 'PUT',
+          fetch(`${apiConfig}/image`, {
+            method: 'put',
             headers: {
               'Content-Type': 'application/json',
               Authorization: window.sessionStorage.getItem('token'),

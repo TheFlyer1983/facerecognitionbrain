@@ -1,5 +1,5 @@
 import React from 'react';
-import './signin.css';
+import { apiConfig } from '../../helpers'
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class SignIn extends React.Component {
   };
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin', {
+    fetch(`${apiConfig}/signin`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -33,7 +33,7 @@ class SignIn extends React.Component {
       .then((data) => {
         if (data.userId && data.success === 'true') {
           this.saveAuthTokenInSession(data.token);
-          fetch(`http://localhost:3000/profile/${data.userId}`, {
+          fetch(`${apiConfig}/profile/${data.userId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
