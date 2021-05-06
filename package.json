@@ -2,7 +2,7 @@
   "name": "facerecognitionbrain",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://theflyer1983.github.io/facerecognitionbrain",
+  "homepage": "https://smart-brain-pl.herokuapp.com",
   "dependencies": {
     "ajv": "^7.0.3",
     "bootstrap": "^4.6.0",
