@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { apiConfig } from '../../helpers'
 import './profile.css';
 
 class Profile extends Component {
@@ -28,7 +29,7 @@ class Profile extends Component {
   };
 
   onProfileUpdate = (data) => {
-    fetch(`http://localhost:3000/profile/${this.props.user.id}`, {
+    fetch(`${apiConfig}/profile/${this.props.user.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
