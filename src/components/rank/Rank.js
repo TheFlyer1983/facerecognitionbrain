@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { apiConfig, endpoints } from '../../helpers';
 
 class Rank extends Component {
   constructor() {
@@ -20,9 +21,19 @@ class Rank extends Component {
   }
 
   generateEmoji = (entries) => {
-    fetch(`https://1am7641mc9.execute-api.eu-west-2.amazonaws.com/rank?rank=${entries}`)
+    const token = window.sessionStorage.getItem('token');
+    fetch(`${apiConfig}${endpoints.rank}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        entries,
+      }),
+    })
       .then((res) => res.json())
-      .then((data) => this.setState({ emoji: data.input }))
+      .then((data) => this.setState({ emoji: data }))
       .catch(console.log);
   };
 
