@@ -1,3 +1,3 @@
-import { apiConfig } from './api-config';
+import { apiConfig, endpoints } from './api-config';
 
-export { apiConfig };
+export { apiConfig, endpoints };
