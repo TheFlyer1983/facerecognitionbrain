@@ -19,6 +19,11 @@ class Register extends React.Component {
   onPasswordChange = (event) => {
     this.setState({ password: event.target.value });
   };
+
+  saveAuthTokenInSession = (token) => {
+    window.sessionStorage.setItem('token', token);
+  }
+
   onSubmitSignIn = () => {
     fetch(`${apiConfig}/register`, {
       method: 'post',
@@ -31,10 +36,15 @@ class Register extends React.Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        const { user } = data.register;
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange('home');
+        const { register, session } = data;
+        if (register && session) {
+          const { user } = register;
+
+          this.saveAuthTokenInSession(session.token);
+          if (user.id) {
+            this.props.loadUser(user);
+            this.props.onRouteChange('home');
+          }
         }
       });
   };
