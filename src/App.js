@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
+import Particles from 'react-tsparticles';
 import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/Logo';
 import ImageLinkForm from './components/imagelinkform/ImageLinkForm';
@@ -12,17 +12,7 @@ import Profile from './components/profile/Profile';
 import { apiConfig } from './helpers';
 import './App.css';
 
-const particlesObject = {
-  particles: {
-    number: {
-      value: 80,
-      density: {
-        enable: true,
-        value_area: 800,
-      },
-    },
-  },
-};
+import particlesObject from './particles.json';
 
 const initialState = {
   input: '',
@@ -168,7 +158,7 @@ class App extends Component {
     const { isSignedIn, imageUrl, route, boxes, isProfileOpen, user } = this.state;
     return (
       <div className="App">
-        <Particles className="particles" params={particlesObject} />
+        <Particles className="particles" options={particlesObject} />
         <Navigation
           onRouteChange={this.onRouteChange}
           isSignedIn={isSignedIn}
